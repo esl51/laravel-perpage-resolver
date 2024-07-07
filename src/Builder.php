@@ -26,12 +26,12 @@ class Builder extends \Illuminate\Database\Eloquent\Builder
      *
      * @throws InvalidArgumentException
      */
-    public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null): LengthAwarePaginator
+    public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null, $total = null)
     {
         $perPage = $perPage ?: Paginator::resolvePerPage();
         $parameters = Paginator::resolveQueryParameters();
 
-        return parent::paginate($perPage, $columns, $pageName, $page)
+        return parent::paginate($perPage, $columns, $pageName, $page, $total)
             ->appends($parameters);
     }
 
@@ -44,7 +44,7 @@ class Builder extends \Illuminate\Database\Eloquent\Builder
      * @param  int|null  $page
      * @return PaginatorInterface
      */
-    public function simplePaginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null): PaginatorInterface
+    public function simplePaginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
     {
         $perPage = $perPage ?: Paginator::resolvePerPage();
         $parameters = Paginator::resolveQueryParameters();
